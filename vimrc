@@ -14,6 +14,7 @@ filetype indent on
 syntax on
 
 " Set colorscheme
+set t_Co=256
 colorscheme onedark
 
 " Add line numbers
@@ -67,13 +68,18 @@ call plug#begin('~/.vim/plugged')
 
  	"Plug 'vim-airline/vim-airline'	
 
+	Plug 'sheerun/vim-polyglot'	
+    
+    Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 " }}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
-" Mappings code goes here.
+" mapleader
+let mapleader = "'"
 
 " }}}
 
@@ -85,6 +91,19 @@ augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
+
+" For terminal colours
+if has('termguicolors')
+    " Turns on true terminal colors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+    " Turns on 24-bit RGB color support
+    set termguicolors
+
+    " Defines how many colors should be used. (maximum: 256, minimum: 0)
+    set t_Co=256
+endif
 
 " }}}
 
